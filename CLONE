@@ -1,2 +1,30 @@
+Clone the Repository
+code:
+git clone https://github.com/Harshimandava/CropRecommendation.git
+
+Navigate to the Project Directory
+code:
+cd Crop-Recommendation-System
+
+Open index.html in Your Browser
+Simply open index.html in your preferred web browser to view the application.
+
+Project Sturcture:
+Crop-Recommendation-System/
+│
+├── images/                 
+│   ├── bg4.jpg
+│   ├── Cotton.jpg
+│   ├── Groundnut.jpg
+│   ├── Sunflower.jpg
+│   └── ...
+│
+├── index.html                # Main HTML file
+├── crop_recommendation.html  # HTML for crop recommendation page
+├── weather.html              # HTML for weather and recommendations page
+├── style.css                 # CSS styles for the application
+└── script.js                 # JavaScript for dynamic functionalities
+
+
 
 
