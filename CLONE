@@ -4,7 +4,8 @@ git clone https://github.com/Harshimandava/CropRecommendation.git
 
 Navigate to the Project Directory
 code:
-cd Crop-Recommendation-System
+cd CropRecommendation
+
 
 Open index.html in Your Browser
 Simply open index.html in your preferred web browser to view the application.
