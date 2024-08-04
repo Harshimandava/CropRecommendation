@@ -25,3 +25,20 @@ Technologies Used
 HTML: For structuring the web pages.
 CSS: For styling the application.
 JavaScript: For dynamic content and interactivity.
+
+
+How It Works:
+User Input: The user inputs their soil texture, nutrient levels, and rainfall data.
+
+
+Recommendations:
+Crops: Based on the soil texture and rainfall, appropriate crops are recommended.
+Chemicals: Suggestions for fertilizers are provided based on the nutrient levels.
+
+License:
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+Contact
+For any questions or feedback, please contact [Harshitha](https://www.linkedin.com/in/harshitha-mandava-b75507298/).
+
+
