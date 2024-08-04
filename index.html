@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System</title>
+    <style>
+        body {
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .btn {
+            border: none; /* Remove borders */
+            color: white; /* Add a text color */
+            padding: 14px 28px; /* Add some padding */
+            cursor: pointer; /* Add a pointer cursor on mouse-over */
+            margin: 5px; /* Add some margin between buttons */
+            font-size: 1em; /* Increase font size */
+            border-radius: 5px; /* Rounded corners */
+        }
+        .green {background-color: #04AA6D;} /* Green */
+        .green:hover {background-color: #46a049;}
+
+        .beige {background-color: #f5f5dc; color: black;} /* Beige */
+        .beige:hover {background: #e0e0b0;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Recommendation System</h1>
+        <p>Helping farmers choose the best crops based on soil and weather conditions</p>
+        <div>
+            <button class="btn green" onclick="location.href='about_us.html'">About Us</button>
+            <button class="btn beige" onclick="location.href='crop_recommendation.html'">Crop Recommendation</button>
+            <button class="btn green" onclick="location.href='contact.html'">Contact Us</button>
+        </div>
+    </div>
+</body>
+</html>
