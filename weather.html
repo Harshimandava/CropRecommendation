@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation</title>
+    <style>
+        body {
+            background-image: url('images/bg7.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: rgb(252, 248, 248);
+            text-align: center;
+            backdrop-filter: blur(2px);
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: transparent; /* Lighter shade */
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: none;
+            width: 80%; /* Adjust as needed */
+        }
+        h1 {
+            font-size: 3em;
+            color: #e9ca9b; /* Darker beige */
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(99, 86, 59, 0.692); /* Slightly different shade */
+            border-radius: 5px;
+            color: #ffffff; /* Darker beige */
+            position: relative;
+        }
+        .crop-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Space between items */
+        }
+        .crop-item {
+            text-align: center;
+            width: 200px; /* Adjust as needed */
+        }
+        .crop-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .crop-img {
+            width: 100%; /* Make the image fill the container */
+            height: 150px; /* Fixed height for consistency */
+            object-fit: cover; /* Maintain aspect ratio, fill the container */
+            border-radius: 5px;
+        }
+        .crop-rainfall {
+            margin-top: 5px;
+        }
+    </style>
+    <script>
+        const cropData = {
+            'loamy': { 'Cotton': 600, 'Groundnut': 500, 'Sunflower': 500 },
+            'clay': { 'Paddy': 800, 'Sugarcane': 1000, 'Soybean': 600 },
+            'sandy': { 'Tomato': 300, 'Chili': 400, 'Cucumber': 350 },
+            'silty': { 'Brinjal': 400, 'Okra': 350, 'Beans': 300 },
+            'peaty': { 'Potato': 500, 'Carrot': 400, 'Turnip': 400 },
+            'saline': { 'Barley': 600, 'Beet': 500, 'Mustard': 550 }
+        };
+
+        const nutrientThresholds = {
+            nitrogen: 20, // Example threshold for Nitrogen
+            phosphorus: 10, // Example threshold for Phosphorus
+            potassium: 15 // Example threshold for Potassium
+        };
+
+        const fertilizerRecommendations = {
+            balanced: "Use Balanced Fertilizer such as Miracle-Gro Water Soluble All Purpose Plant Food (10-10-10) or Osmocote Smart-Release Plant Food (14-14-14).",
+            highNitrogen: "Use High Nitrogen Fertilizer such as Miracle-Gro Water Soluble Lawn Food (30-10-10) or Scotts Turf Builder Lawn Food (20-10-10).",
+            highPhosphorus: "Use High Phosphorus Fertilizer such as Miracle-Gro Water Soluble Bloom Booster (10-52-10) or Jobe’s Organics Bone Meal (4-12-0).",
+            highPotassium: "Use High Potassium Fertilizer such as Jobe’s Organics Tomato & Vegetable Fertilizer (2-7-4) or Miracle-Gro Water Soluble Tomato Plant Food (18-18-21)."
+        };
+
+        function getParameters() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                texture: params.get('texture'),
+                nitrogen: parseFloat(params.get('nitrogen')),
+                phosphorus: parseFloat(params.get('phosphorus')),
+                potassium: parseFloat(params.get('potassium')),
+                organicMatter: parseFloat(params.get('organic_matter')),
+                rainfall: parseFloat(params.get('rainfall'))
+            };
+        }
+
+        function recommendCrops() {
+            const { texture, rainfall } = getParameters();
+            const recommendations = cropData[texture] || {};
+            let recommendationsText = '';
+
+            for (const [crop, minRainfall] of Object.entries(recommendations)) {
+                if (rainfall >= minRainfall) {
+                    recommendationsText += `
+                        <div class="crop-item">
+                            <p class="crop-name">${crop}</p>
+                            <img src="images/${crop}.jpg" alt="${crop}" class="crop-img">
+                            <p class="crop-rainfall">Minimum Rainfall Required: ${minRainfall} mm</p>
+                        </div>`;
+                }
+            }
+
+            document.getElementById('recommendations').innerHTML = recommendationsText || '<p>No recommendations available for this soil texture and rainfall.</p>';
+        }
+
+        function recommendChemicals() {
+            const { nitrogen, phosphorus, potassium } = getParameters();
+            let chemicalRecommendationsText = '';
+
+            if (nitrogen < nutrientThresholds.nitrogen) {
+                chemicalRecommendationsText += `<p>Nitrogen is low. Recommended fertilizer: ${fertilizerRecommendations.highNitrogen}</p>`;
+            }
+            if (phosphorus < nutrientThresholds.phosphorus) {
+                chemicalRecommendationsText += `<p>Phosphorus is low. Recommended fertilizer: ${fertilizerRecommendations.highPhosphorus}</p>`;
+            }
+            if (potassium < nutrientThresholds.potassium) {
+                chemicalRecommendationsText += `<p>Potassium is low. Recommended fertilizer: ${fertilizerRecommendations.highPotassium}</p>`;
+            }
+
+            if (!chemicalRecommendationsText) {
+                chemicalRecommendationsText = '<p>Your soil is perfectly fit for the recommended crops.</p>';
+            }
+
+            document.getElementById('chemicals').innerHTML = chemicalRecommendationsText;
+        }
+
+        window.onload = function() {
+            recommendCrops();
+            recommendChemicals();
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Recommendations</h1>
+        <div id="recommendations" class="result crop-container">
+            <!-- Crop recommendations will be displayed here -->
+        </div>
+        <h1>Chemical Recommendations</h1>
+        <div id="chemicals" class="result">
+            <!-- Chemical recommendations will be displayed here -->
+        </div>
+    </div>
+</body>
+</html>

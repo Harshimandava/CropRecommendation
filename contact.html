@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-image: url('images/ab.jpg'); /* Background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #4e4e4e; /* Dark beige color */
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px); /* Applies blur effect to the background */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: auto;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+            border-radius: 8px;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .card .title {
+            color: grey;
+            font-size: 18px;
+        }
+
+        .card p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .card a {
+            text-decoration: none;
+            font-size: 22px;
+            color: black;
+            margin: 0 5px;
+        }
+
+        .card a:hover {
+            opacity: 0.7;
+        }
+
+        .card button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #4e4e4e; /* Dark beige color */
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .card button:hover {
+            background-color: #333333; /* Darker shade for hover effect */
+        }
+
+        .form-section {
+            margin-top: 20px;
+        }
+
+        .input-group {
+            margin: 10px 0;
+        }
+
+        input, textarea {
+            width: calc(100% - 22px); /* Full width with padding adjustment */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4e4e4e; /* Dark beige color */
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            padding: 15px 30px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #333333; /* Darker shade for hover effect */
+        }
+
+        a {
+            color: #4e4e4e; /* Dark beige color */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            display: none;
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <img src="images/c.jpeg" alt="Harshitha">
+            <h1>Harshitha</h1>
+            <p class="title">CEO</p>
+            <p>Email: harshitha@gmail.com</p>
+            <p>Phone: +91 9999988888</p>
+            <a href="mailto:harshithamandava2005@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/harshitha-mandava-b75507298/" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/harshitha-mandava-b75507298/" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://www.linkedin.com/in/harshitha-mandava-b75507298/" target="_blank"><i class="fa fa-facebook"></i></a>
+            <p><button onclick="copyPhoneNumber()">Contact</button></p>
+            <p class="message" id="message">Phone Number Copied to clipboard!</p>
+        </div>
+        
+        <p><a href="index.html">Back to Home</a></p>
+    </div>
+
+    <script>
+        function copyPhoneNumber() {
+            // Create a temporary input element to hold the phone number
+            var tempInput = document.createElement('input');
+            tempInput.value = '+91 9999988888'; // Phone number to copy
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Show the "Copied to clipboard" message
+            var message = document.getElementById('message');
+            message.style.display = 'block';
+
+            // Hide the message after 2 seconds
+            setTimeout(function() {
+                message.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

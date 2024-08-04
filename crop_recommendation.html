@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation</title>
+    <style>
+        body {
+            background-image: url('images/bg1.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: rgb(199, 199, 142);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: none;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .input-group input[type="text"], .input-group select {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .input-group select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: white;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDE4IDE4Ij4KPHBhdGggZD0iTTAsMGgxOHYxOGgtMTh2LTE4SDB6IiBmaWxsPSIjYjJiYmJiIi8+Cjwvc3ZnPgo='); 
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            margin: 20px 0;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+            background-color: #04AA6D;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        input[type="submit"]:hover {
+            background-color: #46a049;
+        }
+        label {
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const nitrogen = parseFloat(document.getElementById('nitrogen').value);
+            const phosphorus = parseFloat(document.getElementById('phosphorus').value);
+            const potassium = parseFloat(document.getElementById('potassium').value);
+            const ph = parseFloat(document.getElementById('ph').value);
+            const organicMatter = parseFloat(document.getElementById('organic_matter').value);
+            const texture = document.getElementById('texture').value;
+            const rainfall = parseFloat(document.getElementById('rainfall').value);
+
+            if (isNaN(nitrogen) || nitrogen < 0 || nitrogen > 100) {
+                alert('Nitrogen (N) should be a percentage between 0 and 100.');
+                return false;
+            }
+            if (isNaN(phosphorus) || phosphorus < 0 || phosphorus > 100) {
+                alert('Phosphorus (P) should be a percentage between 0 and 100.');
+                return false;
+            }
+            if (isNaN(potassium) || potassium < 0 || potassium > 100) {
+                alert('Potassium (K) should be a percentage between 0 and 100.');
+                return false;
+            }
+            if (isNaN(ph) || ph < 0 || ph > 14) {
+                alert('pH should be a value between 0 and 14.');
+                return false;
+            }
+            if (isNaN(organicMatter) || organicMatter < 0 || organicMatter > 100) {
+                alert('Organic Matter should be a percentage between 0 and 100.');
+                return false;
+            }
+            if (isNaN(rainfall) || rainfall < 0) {
+                alert('Annual Rainfall should be a positive number.');
+                return false;
+            }
+
+            // Redirect to weather.html with the collected data
+            const url = `weather.html?texture=${encodeURIComponent(texture)}&nitrogen=${encodeURIComponent(nitrogen)}&phosphorus=${encodeURIComponent(phosphorus)}&potassium=${encodeURIComponent(potassium)}&organic_matter=${encodeURIComponent(organicMatter)}&rainfall=${encodeURIComponent(rainfall)}`;
+            window.location.href = url;
+            return false; // Prevent form submission
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Recommendation</h1>
+        <form onsubmit="return validateForm()">
+            <div class="input-group">
+                <label for="nitrogen">Nitrogen (N):</label>
+                <input type="text" id="nitrogen" name="nitrogen" placeholder="e.g., 10%" required>
+            </div>
+            <div class="input-group">
+                <label for="phosphorus">Phosphorus (P):</label>
+                <input type="text" id="phosphorus" name="phosphorus" placeholder="e.g., 5%" required>
+            </div>
+            <div class="input-group">
+                <label for="potassium">Potassium (K):</label>
+                <input type="text" id="potassium" name="potassium" placeholder="e.g., 8%" required>
+            </div>
+            <div class="input-group">
+                <label for="ph">pH:</label>
+                <input type="text" id="ph" name="ph" placeholder="e.g., 6.5" required>
+            </div>
+            <div class="input-group">
+                <label for="organic_matter">Organic Matter:</label>
+                <input type="text" id="organic_matter" name="organic_matter" placeholder="e.g., 3%" required>
+            </div>
+            <div class="input-group">
+                <label for="texture">Soil Texture:</label>
+                <select id="texture" name="texture" required>
+                    <option value="" disabled selected>Select soil texture</option>
+                    <option value="loamy">Loamy</option>
+                    <option value="clay">Clay</option>
+                    <option value="sandy">Sandy</option>
+                    <option value="silty">Silty</option>
+                    <option value="peaty">Peaty</option>
+                    <option value="saline">Saline</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="rainfall">Annual Rainfall (mm):</label>
+                <input type="text" id="rainfall" name="rainfall" placeholder="e.g., 800" required>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
